@@ -46,7 +46,8 @@ app.use((err, req, res, next) => {
     message: err.message || '오류가 발생했습니다.',
   });
 });
-
+console.log(process.env.SEQUELIZE_USERNAME);
+console.log(process.env.SEQUELIZE_PASSWORD);
 app.listen(app.get('port'), () => {
   console.log(app.get('port'), '번 포트에서 대기중');
 });
