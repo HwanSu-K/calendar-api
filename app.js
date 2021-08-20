@@ -9,7 +9,7 @@ dotenv.config();
 const v1Router = require('./routes/v1');
 
 const app = express();
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 8001);
 sequelize
   .sync({ force: false })
   .then(() => {
