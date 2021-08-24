@@ -1,4 +1,4 @@
-# calender API
+# calendar API
 
 ## 조회
 
