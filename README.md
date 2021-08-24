@@ -1,4 +1,4 @@
-# calender API
+# calendar API
 
 ## 조회
 
@@ -7,8 +7,8 @@
 #### URL
 
 ```
-GET /calender HTTP/1.1
-Host: kumas.dev:8080
+GET /calendar HTTP/1.1
+Host: kumas.dev:8001
 Authorization: {USER_ID}
 Content-type: application/x-www-form-urlencoded;charset=utf-8
 ```
@@ -35,8 +35,8 @@ Content-type: application/x-www-form-urlencoded;charset=utf-8
 #### URL
 
 ```
-POST /calender HTTP/1.1
-Host: kumas.dev:8080
+POST /calendar HTTP/1.1
+Host: kumas.dev:8001
 Authorization: {USER_ID}
 Content-type: application/x-www-form-urlencoded;charset=utf-8
 ```
@@ -62,8 +62,8 @@ Content-type: application/x-www-form-urlencoded;charset=utf-8
 #### URL
 
 ```
-PUT /calender/{id} HTTP/1.1
-Host: kumas.dev:8080
+PUT /calendar/{id} HTTP/1.1
+Host: kumas.dev:8001
 Authorization: {USER_ID}
 Content-type: application/x-www-form-urlencoded;charset=utf-8
 ```
@@ -89,8 +89,8 @@ Content-type: application/x-www-form-urlencoded;charset=utf-8
 #### URL
 
 ```
-DELETE /calender/{id} HTTP/1.1
-Host: kumas.dev:8080
+DELETE /calendar/{id} HTTP/1.1
+Host: kumas.dev:8001
 Authorization: {USER_ID}
 Content-type: application/x-www-form-urlencoded;charset=utf-8
 ```
