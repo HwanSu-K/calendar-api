@@ -1,11 +1,11 @@
 const express = require('express');
 const { isLoggedIn } = require('./middlewares');
-const Calender = require('../models/calender');
+const Calendar = require('../models/calendar');
 
 const router = express.Router();
 
 router.get('/', isLoggedIn, async (req, res) => {
-  const result = await Calender.findAll({
+  const result = await Calendar.findAll({
     where: { userId: req.snsId },
     attributes: ['id', 'content', 'dateStart', 'dateEnd'],
   });
@@ -18,7 +18,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 
 router.post('/', isLoggedIn, async (req, res, next) => {
   try {
-    const result = await Calender.create({
+    const result = await Calendar.create({
       userId: req.snsId,
       content: req.body.content,
       dateStart: req.body.dateStart,
@@ -36,7 +36,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
 
 router.put('/:id', isLoggedIn, async (req, res, next) => {
   try {
-    await Calender.update(
+    await Calendar.update(
       {
         content: req.body.content,
         dateStart: req.body.dateStart,
@@ -57,7 +57,7 @@ router.put('/:id', isLoggedIn, async (req, res, next) => {
 
 router.delete('/:id', isLoggedIn, async (req, res, next) => {
   try {
-    await Calender.destroy({ where: { id: req.params.id } });
+    await Calendar.destroy({ where: { id: req.params.id } });
     res.status(201).json({
       code: 201,
       message: '삭제되었습니다.',
