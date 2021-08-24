@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const hpp = require('hpp');
 
 dotenv.config();
-const calenderRouter = require('./routes/calender');
+const calendarRouter = require('./routes/calendar');
 
 const app = express();
 app.set('port', process.env.PORT || 8001);
@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/calendar', calenderRouter);
+app.use('/calendar', calendarRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다`);
