@@ -8,7 +8,7 @@
 
 ```
 GET /calendar HTTP/1.1
-Host: kumas.dev:8001
+Host: api.kumas.dev:8001
 Authorization: {USER_ID}
 Content-type: application/x-www-form-urlencoded;charset=utf-8
 ```
@@ -36,7 +36,7 @@ Content-type: application/x-www-form-urlencoded;charset=utf-8
 
 ```
 POST /calendar HTTP/1.1
-Host: kumas.dev:8001
+Host: api.kumas.dev:8001
 Authorization: {USER_ID}
 Content-type: application/x-www-form-urlencoded;charset=utf-8
 ```
@@ -63,7 +63,7 @@ Content-type: application/x-www-form-urlencoded;charset=utf-8
 
 ```
 PUT /calendar/{id} HTTP/1.1
-Host: kumas.dev:8001
+Host: api.kumas.dev:8001
 Authorization: {USER_ID}
 Content-type: application/x-www-form-urlencoded;charset=utf-8
 ```
@@ -90,7 +90,7 @@ Content-type: application/x-www-form-urlencoded;charset=utf-8
 
 ```
 DELETE /calendar/{id} HTTP/1.1
-Host: kumas.dev:8001
+Host: api.kumas.dev:8001
 Authorization: {USER_ID}
 Content-type: application/x-www-form-urlencoded;charset=utf-8
 ```
