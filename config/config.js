@@ -7,7 +7,6 @@ module.exports = {
     host: '127.0.0.1',
     dialect: 'mysql',
     dialectOptions: { dateStrings: true, typeCast: true },
-    timezone: '+09:00',
   },
   production: {
     username: process.env.SEQUELIZE_USERNAME,
@@ -16,6 +15,5 @@ module.exports = {
     host: process.env.SEQUELIZE_HOSTNAME,
     dialect: 'mysql',
     dialectOptions: { dateStrings: true, typeCast: true },
-    timezone: '+09:00',
   },
 };
