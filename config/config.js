@@ -13,7 +13,7 @@ module.exports = {
     username: process.env.SEQUELIZE_USERNAME,
     password: process.env.SEQUELIZE_PASSWORD,
     database: 'calendar',
-    host: '127.0.0.1',
+    host: process.env.SEQUELIZE_HOSTNAME,
     dialect: 'mysql',
     dialectOptions: { dateStrings: true, typeCast: true },
     timezone: '+09:00',
