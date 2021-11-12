@@ -1,6 +1,8 @@
 # calendar API
 
-*WEB, Android, IOS 등 다양한 플랫폼과 통신을 할수있는 HTTP 통신 프로토콜 구현 restAPI 규격인 GET/POST/PUT/DELETE 준수하며 작성*
+*WEB, Android, IOS 등 다양한 플랫폼과 통신을 할수있는 HTTP 통신 프로토콜 구현*
+
+*restAPI 규격인 GET/POST/PUT/DELETE 준수하며 작성*
 
 
 ## 조회
