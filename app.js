@@ -32,8 +32,8 @@ if (process.env.NODE_ENV === 'production') {
   app.use(morgan('combined'));
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(hpp());
-  sessionOptuon.proxy = true;
-  sessionOptuon.cookie.secure = true;
+  // sessionOptuon.proxy = true;
+  // sessionOptuon.cookie.secure = true;
 } else {
   app.use(morgan('dev'));
 }
