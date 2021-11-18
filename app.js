@@ -51,23 +51,21 @@ app.use((err, req, res, next) => {
     message: err.message || '오류가 발생했습니다.',
   });
 });
-if (process.env.NODE_ENV === 'production') {
-  console.log('a');
-  try {
-    const option = {
-      ca: fs.readFileSync('/etc/letsencrypt/live/kumas.dev/fullchain.pem'),
-      key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/privkey.pem'), 'utf8').toString(),
-      cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/cert.pem'), 'utf8').toString(),
-    };
-    https.createServer(option, app).listen(app.get('port'), () => {
-      console.log(`[HTTPS] Server is started on port ${app.get('port')}`);
-    });
-  } catch (error) {
-    console.error('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
-    console.warn(error);
-  }
-} else {
-  app.listen(app.get('port'), () => {
-    console.log(app.get('port'), '번 포트에서 대기중');
+
+app.listen(app.get('port'), () => {
+  console.log(app.get('port'), '번 포트에서 대기중');
+});
+
+try {
+  const option = {
+    ca: fs.readFileSync('/etc/letsencrypt/live/kumas.dev/fullchain.pem'),
+    key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/privkey.pem'), 'utf8').toString(),
+    cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/cert.pem'), 'utf8').toString(),
+  };
+  https.createServer(option, app).listen(parseInt(app.get('port')) + 1, () => {
+    console.log(`[HTTPS] Server is started on port ${app.get('port')}`);
   });
+} catch (error) {
+  console.error('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
+  console.warn(error);
 }
