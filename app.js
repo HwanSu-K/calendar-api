@@ -8,6 +8,7 @@ const helmet = require('helmet');
 const hpp = require('hpp');
 const { swaggerUi, specs } = require('./modules/swagger');
 const https = require('https');
+const http = require('http');
 
 dotenv.config();
 const calendarRouter = require('./routes/calendar');
@@ -52,7 +53,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(app.get('port'), () => {
+http.createServer(app).listen(8000, () => {
   console.log(app.get('port'), '번 포트에서 대기중');
 });
 
@@ -62,10 +63,9 @@ try {
     key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/privkey.pem'), 'utf8').toString(),
     cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/cert.pem'), 'utf8').toString(),
   };
-  https.createServer(option, app).listen(parseInt(app.get('port')) + 1, () => {
+  https.createServer(option, app).listen(8443, () => {
     console.log(`[HTTPS] Server is started on port ${app.get('port')}`);
   });
 } catch (error) {
   console.error('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
-  console.warn(error);
 }
