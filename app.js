@@ -1,3 +1,4 @@
+const fs = require('fs');
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
@@ -5,6 +6,7 @@ const { sequelize } = require('./models');
 const helmet = require('helmet');
 const hpp = require('hpp');
 const { swaggerUi, specs } = require('./modules/swagger');
+const https = require('https');
 
 dotenv.config();
 const calendarRouter = require('./routes/calendar');
@@ -48,7 +50,23 @@ app.use((err, req, res, next) => {
     message: err.message || '오류가 발생했습니다.',
   });
 });
-
-app.listen(app.get('port'), () => {
-  console.log(app.get('port'), '번 포트에서 대기중');
-});
+if (process.env.NODE_ENV === 'production') {
+  console.log('a');
+  try {
+    const option = {
+      ca: fs.readFileSync('/etc/letsencrypt/live/kumas.dev/fullchain.pem'),
+      key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/privkey.pem'), 'utf8').toString(),
+      cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/cert.pem'), 'utf8').toString(),
+    };
+    https.createServer(option, app).listen(sslport, () => {
+      console.success(`[HTTPS] Server is started on port ${app.get('port')}`);
+    });
+  } catch (error) {
+    console.error('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
+    console.warn(error);
+  }
+} else {
+  app.listen(app.get('port'), () => {
+    console.log(app.get('port'), '번 포트에서 대기중');
+  });
+}
