@@ -60,7 +60,7 @@ if (process.env.NODE_ENV === 'production') {
       cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/cert.pem'), 'utf8').toString(),
     };
     https.createServer(option, app).listen(app.get('port'), () => {
-      console.success(`[HTTPS] Server is started on port ${app.get('port')}`);
+      console.log(`[HTTPS] Server is started on port ${app.get('port')}`);
     });
   } catch (error) {
     console.error('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
