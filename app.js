@@ -9,12 +9,15 @@ const hpp = require('hpp');
 const { swaggerUi, specs } = require('./modules/swagger');
 const https = require('https');
 const http = require('http');
+const cors = require('cors');
 
 dotenv.config();
-const calendarRouter = require('./routes/calendar');
+const calendarRouter = require('./routes');
 
 const app = express();
-app.set('port', process.env.PORT || 8001);
+app.set('port', process.env.PORT || 8000);
+app.set('sslPort', parseInt(app.get('port')) + 1);
+
 sequelize
   .sync({ force: false })
   .then(() => {
@@ -25,19 +28,25 @@ sequelize
   });
 
 if (process.env.NODE_ENV === 'production') {
-  // app.enable('trust proxy');
+  app.enable('trust proxy');
   app.use(morgan('combined'));
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(hpp());
-  // sessionOptuon.proxy = true;
-  // sessionOptuon.cookie.secure = true;
+  sessionOptuon.proxy = true;
+  sessionOptuon.cookie.secure = true;
 } else {
   app.use(morgan('dev'));
 }
+app.use(
+  cors({
+    origin: 'https://api.kumas.dev',
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/calendar', calendarRouter);
+app.use('', calendarRouter);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use((req, res, next) => {
@@ -53,8 +62,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-http.createServer(app).listen(8000, () => {
-  console.log(app.get('port'), '번 포트에서 대기중');
+http.createServer(app).listen(app.get('port'), () => {
+  console.log(`http Server is started on port ${app.get('port')}`);
 });
 
 try {
@@ -63,9 +72,9 @@ try {
     key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/privkey.pem'), 'utf8').toString(),
     cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/cert.pem'), 'utf8').toString(),
   };
-  https.createServer(option, app).listen(8443, () => {
-    console.log(`[HTTPS] Server is started on port ${app.get('port')}`);
+  https.createServer(option, app).listen(app.get('sslPort'), () => {
+    console.log(`https Server is started on port ${app.get('sslPort')}`);
   });
 } catch (error) {
-  console.error('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
+  console.error('https 오류가 발생하였습니다. https 서버는 실행되지 않습니다.');
 }
