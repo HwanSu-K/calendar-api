@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const { sequelize } = require('./models');
 const helmet = require('helmet');
 const hpp = require('hpp');
+const { swaggerUi, specs } = require('./modules/swagger');
 
 dotenv.config();
 const calendarRouter = require('./routes/calendar');
@@ -33,6 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/calendar', calendarRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다`);

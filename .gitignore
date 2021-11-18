@@ -167,4 +167,5 @@ dist
 .history
 .ionide
 
+.backup/
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos,node

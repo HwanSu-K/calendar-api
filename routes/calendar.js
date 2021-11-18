@@ -2,7 +2,35 @@ const express = require('express');
 const { isLoggedIn } = require('./middlewares');
 const Calendar = require('../models/calendar');
 
+/**
+ * @swagger
+ * tags:
+ *   name: Calendar
+ *   description: Calendar management
+ */
 const router = express.Router();
+/**
+ * @swagger
+ * paths:
+ *  /calendar:
+ *    get:
+ *      summary: Select Calendar
+ *      tags: [Calendar]
+ *      responses:
+ *        "201":
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/ResultResponse'
+ *        "404":
+ *          description: not is loggedIn
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/DefaultResponse'
+ *      security:
+ *      - ApiKeyAuth: []
+ */
 
 router.get('/', isLoggedIn, async (req, res) => {
   const result = await Calendar.findAll({
@@ -16,6 +44,33 @@ router.get('/', isLoggedIn, async (req, res) => {
   });
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /calendar:
+ *    post:
+ *      summary: Create Calendar
+ *      tags: [Calendar]
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Calendar'
+ *      responses:
+ *        "201":
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/ResultResponse'
+ *        "404":
+ *          description: not is loggedIn
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/DefaultResponse'
+ *      security:
+ *      - ApiKeyAuth: []
+ */
 router.post('/', isLoggedIn, async (req, res, next) => {
   try {
     const result = await Calendar.create({
@@ -34,6 +89,37 @@ router.post('/', isLoggedIn, async (req, res, next) => {
   }
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /calendar/{id}:
+ *    put:
+ *      summary: Edit Calendar
+ *      tags: [Calendar]
+ *      parameters:
+ *        - in: query
+ *          name: id
+ *          required: true
+ *      requestBody:
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Calendar'
+ *      responses:
+ *        "201":
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/DefaultResponse'
+ *        "404":
+ *          description: not is loggedIn
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/DefaultResponse'
+ *      security:
+ *      - ApiKeyAuth: []
+ */
 router.put('/:id', isLoggedIn, async (req, res, next) => {
   try {
     await Calendar.update(
@@ -55,6 +141,31 @@ router.put('/:id', isLoggedIn, async (req, res, next) => {
   }
 });
 
+/**
+ * @swagger
+ * paths:
+ *  /calendar/{id}:
+ *    delete:
+ *      summary: Delete Calendar
+ *      tags: [Calendar]
+ *      parameters:
+ *        - in: query
+ *          name: id
+ *      responses:
+ *        "201":
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/DefaultResponse'
+ *        "404":
+ *          description: not is loggedIn
+ *          content:
+ *            application/json:
+ *              schema:
+ *                $ref: '#/components/schemas/DefaultResponse'
+ *      security:
+ *      - ApiKeyAuth: []
+ */
 router.delete('/:id', isLoggedIn, async (req, res, next) => {
   try {
     await Calendar.destroy({ where: { id: req.params.id } });

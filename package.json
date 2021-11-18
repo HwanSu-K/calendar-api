@@ -4,13 +4,15 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production PORT=8001 pm2 start app.js",
+    "start": "NODE_ENV=production PORT=8001 node app.js",
     "dev": "nodemon app"
   },
   "author": "kumas.K",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
   },
   "dependencies": {
     "dotenv": "^10.0.0",

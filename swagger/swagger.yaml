@@ -1,0 +1,23 @@
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+  schemas:
+    DefaultResponse:
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    ResultResponse:
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+        result:
+          type: array
+          items:
+            type: object

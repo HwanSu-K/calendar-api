@@ -1,4 +1,33 @@
 const Sequelize = require('sequelize');
+/**
+ * @swagger
+ *  components:
+ *    schemas:
+ *      Calendar:
+ *        type: object
+ *        required:
+ *          - id
+ *          - snsId
+ *          - dateStart
+ *          - dateEnd
+ *        properties:
+ *          id:
+ *            type: int
+ *          snsId:
+ *            type: string
+ *          content:
+ *            type: string
+ *          dateStart:
+ *            type: string
+ *            format: date
+ *          dateEnd:
+ *            type: string
+ *            format: date
+ *        example:
+ *           content: content
+ *           dateStart: 2021-01-01 00:00:00
+ *           dateEnd: 2021-01-01 00:00:00
+ */
 
 module.exports = class Calendar extends Sequelize.Model {
   static init(sequelize) {
