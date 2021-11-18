@@ -58,7 +58,7 @@ if (process.env.NODE_ENV === 'production') {
       key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/privkey.pem'), 'utf8').toString(),
       cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/kumas.dev/cert.pem'), 'utf8').toString(),
     };
-    https.createServer(option, app).listen(sslport, () => {
+    https.createServer(option, app).listen(app.get('port'), () => {
       console.success(`[HTTPS] Server is started on port ${app.get('port')}`);
     });
   } catch (error) {
