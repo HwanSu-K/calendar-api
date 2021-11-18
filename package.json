@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "NODE_ENV=production PORT=8001 node app.js",
+    "start": "NODE_ENV=production PORT=8001 pm2 start app.js",
     "dev": "nodemon app"
   },
   "author": "kumas.K",
