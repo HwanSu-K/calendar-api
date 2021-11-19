@@ -3,17 +3,14 @@ const swaggereJsdoc = require('swagger-jsdoc');
 
 const options = {
   swaggerDefinition: {
-    openapi: '3.0.0',
+    swagger: '2.0',
     info: {
       title: 'Calendar API',
       version: '1.0.0',
       description: '',
     },
-    servers: [
-      {
-        url: 'https://api.kumas.dev',
-      },
-    ],
+    host: '127.0.0.1:8001',
+    schemes: ['http', 'https'],
   },
   apis: ['./models/*.js', './routes/*.js', './swagger/*.yaml'],
 };

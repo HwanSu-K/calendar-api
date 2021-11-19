@@ -18,16 +18,12 @@ const router = express.Router();
  *      tags: [Calendar]
  *      responses:
  *        "201":
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/ResultResponse'
+ *          schema:
+ *            $ref: '#/definitions/ResultResponse'
  *        "404":
  *          description: not is loggedIn
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/DefaultResponse'
+ *          schema:
+ *            $ref: '#/definitions/DefaultResponse'
  *      security:
  *      - ApiKeyAuth: []
  */
@@ -51,23 +47,20 @@ router.get('/', isLoggedIn, async (req, res) => {
  *    post:
  *      summary: Create Calendar
  *      tags: [Calendar]
- *      requestBody:
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Calendar'
+ *      parameters:
+ *      - in: body
+ *        name: ss
+ *        required: true
+ *        schema:
+ *          $ref: '#/definitions/Calendar'
  *      responses:
  *        "201":
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/ResultResponse'
+ *          schema:
+ *            $ref: '#/definitions/ResultResponse'
  *        "404":
  *          description: not is loggedIn
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/DefaultResponse'
+ *          schema:
+ *            $ref: '#/definitions/DefaultResponse'
  *      security:
  *      - ApiKeyAuth: []
  */
@@ -97,26 +90,22 @@ router.post('/', isLoggedIn, async (req, res, next) => {
  *      summary: Edit Calendar
  *      tags: [Calendar]
  *      parameters:
- *        - in: query
+ *        - in: path
  *          name: id
  *          required: true
- *      requestBody:
- *        content:
- *          application/json:
- *            schema:
- *              $ref: '#/components/schemas/Calendar'
+ *        - in: body
+ *          name: body
+ *          required: true
+ *          schema:
+ *            $ref: '#/definitions/Calendar'
  *      responses:
  *        "201":
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/DefaultResponse'
+ *          schema:
+ *            $ref: '#/definitions/DefaultResponse'
  *        "404":
  *          description: not is loggedIn
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/DefaultResponse'
+ *          schema:
+ *            $ref: '#/definitions/DefaultResponse'
  *      security:
  *      - ApiKeyAuth: []
  */
@@ -149,20 +138,17 @@ router.put('/:id', isLoggedIn, async (req, res, next) => {
  *      summary: Delete Calendar
  *      tags: [Calendar]
  *      parameters:
- *        - in: query
+ *        - in: path
  *          name: id
+ *          required: true
  *      responses:
  *        "201":
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/DefaultResponse'
+ *          schema:
+ *            $ref: '#/definitions/DefaultResponse'
  *        "404":
  *          description: not is loggedIn
- *          content:
- *            application/json:
- *              schema:
- *                $ref: '#/components/schemas/DefaultResponse'
+ *          schema:
+ *            $ref: '#/definitions/DefaultResponse'
  *      security:
  *      - ApiKeyAuth: []
  */
