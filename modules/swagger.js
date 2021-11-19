@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://api.kumas.dev',
+        url: 'https://api.kumas.dev',
       },
     ],
   },
