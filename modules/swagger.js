@@ -9,8 +9,8 @@ const options = {
       version: '1.0.0',
       description: '',
     },
-    host: '127.0.0.1:8001',
-    schemes: ['http', 'https'],
+    host: 'api.kumas.dev',
+    schemes: ['https', 'http'],
   },
   apis: ['./models/*.js', './routes/*.js', './swagger/*.yaml'],
 };
