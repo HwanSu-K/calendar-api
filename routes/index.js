@@ -49,7 +49,7 @@ router.get('/', isLoggedIn, async (req, res) => {
  *      tags: [Calendar]
  *      parameters:
  *      - in: body
- *        name: ss
+ *        name: body
  *        required: true
  *        schema:
  *          $ref: '#/definitions/Calendar'
