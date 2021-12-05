@@ -12,7 +12,7 @@ const router = express.Router();
 /**
  * @swagger
  * paths:
- *  /calendar:
+ *  /:
  *    get:
  *      summary: Select Calendar
  *      tags: [Calendar]
@@ -43,7 +43,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 /**
  * @swagger
  * paths:
- *  /calendar:
+ *  /:
  *    post:
  *      summary: Create Calendar
  *      tags: [Calendar]
@@ -85,7 +85,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
 /**
  * @swagger
  * paths:
- *  /calendar/{id}:
+ *  /{id}:
  *    put:
  *      summary: Edit Calendar
  *      tags: [Calendar]
@@ -133,7 +133,7 @@ router.put('/:id', isLoggedIn, async (req, res, next) => {
 /**
  * @swagger
  * paths:
- *  /calendar/{id}:
+ *  /{id}:
  *    delete:
  *      summary: Delete Calendar
  *      tags: [Calendar]
