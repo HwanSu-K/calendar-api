@@ -12,7 +12,7 @@ const router = express.Router();
 /**
  * @swagger
  * paths:
- *  /:
+ *  /api/calendar:
  *    get:
  *      summary: Select Calendar
  *      tags: [Calendar]
@@ -28,7 +28,7 @@ const router = express.Router();
  *      - ApiKeyAuth: []
  */
 
-router.get('/', isLoggedIn, async (req, res) => {
+router.get('/calendar', isLoggedIn, async (req, res) => {
   const result = await Calendar.findAll({
     where: { userId: req.snsId },
     attributes: ['id', 'content', 'dateStart', 'dateEnd'],
@@ -43,7 +43,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 /**
  * @swagger
  * paths:
- *  /:
+ *  /api/calendar:
  *    post:
  *      summary: Create Calendar
  *      tags: [Calendar]
@@ -64,7 +64,7 @@ router.get('/', isLoggedIn, async (req, res) => {
  *      security:
  *      - ApiKeyAuth: []
  */
-router.post('/', isLoggedIn, async (req, res, next) => {
+router.post('/calendar', isLoggedIn, async (req, res, next) => {
   try {
     const result = await Calendar.create({
       userId: req.snsId,
@@ -85,7 +85,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
 /**
  * @swagger
  * paths:
- *  /{id}:
+ *  /api/calendar/{id}:
  *    put:
  *      summary: Edit Calendar
  *      tags: [Calendar]
@@ -109,7 +109,7 @@ router.post('/', isLoggedIn, async (req, res, next) => {
  *      security:
  *      - ApiKeyAuth: []
  */
-router.put('/:id', isLoggedIn, async (req, res, next) => {
+router.put('/calendar/:id', isLoggedIn, async (req, res, next) => {
   try {
     await Calendar.update(
       {
@@ -133,7 +133,7 @@ router.put('/:id', isLoggedIn, async (req, res, next) => {
 /**
  * @swagger
  * paths:
- *  /{id}:
+ *  /api/calendar/{id}:
  *    delete:
  *      summary: Delete Calendar
  *      tags: [Calendar]
@@ -152,7 +152,7 @@ router.put('/:id', isLoggedIn, async (req, res, next) => {
  *      security:
  *      - ApiKeyAuth: []
  */
-router.delete('/:id', isLoggedIn, async (req, res, next) => {
+router.delete('/calendar/:id', isLoggedIn, async (req, res, next) => {
   try {
     await Calendar.destroy({ where: { id: req.params.id } });
     res.status(201).json({
